@@ -87,13 +87,10 @@ grade_level = pd.get_dummies(projects['Project Grade Level Category']) #5 Column
 project_dummies = pd.concat([projects, resource_types, subject_category, subject_subcategories, project_type, grade_level], axis=1)
 
 #drop the dummied columns
-project_dummies.drop(['Project Resource Category', 'Project Subject Category Tree', 'Project Subject Subcategory Tree','Project Type', 'Project Current Status', 'Project Fully Funded Date', 'Project Posted Date', 'Teacher Project Posted Sequence', 'Project Title', 'Project Essay', 'Project Short Description', 'Project Need Statement', 'Project Grade Level Category', 'School ID', 'School Name', 'School Metro Type', 'School Percentage Free Lunch', 'School State', 'School Zip', 'School City', 'School County', 'School District', 'Region', 'Teacher ID', 'Project Expiration Date' ], axis=1, inplace=True)
+project_dummies.drop(['Project Resource Category', 'Project Subject Category Tree', 'Project Subject Subcategory Tree','Project Type', 'Project Current Status', 'Project Fully Funded Date', 'Project Posted Date', 'Teacher Project Posted Sequence', 'Project Essay', 'Project Short Description', 'Project Need Statement', 'Project Grade Level Category', 'School ID', 'School Name', 'School Metro Type', 'School Percentage Free Lunch', 'School State', 'School Zip', 'School City', 'School County', 'School District', 'Region', 'Teacher ID', 'Project Expiration Date' ], axis=1, inplace=True)
 
-## School Info
+project_dummies.to_csv('projects_with_categorical_data.csv')
 
-#Feature Engineer
-
-#TFIDF
 
 ## Do the projects cluster better using TFIDFs of the need statements or
 ## using dummies of the categories that already exist?
