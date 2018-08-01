@@ -31,8 +31,10 @@ Cost function is defined as the sum distance of all points to their respective c
 
 #### 100 Clusters
 
-| -- |'Project Resource Category | Project Subject Category Tree | Project Subject Subcategory Tree | Project Type | School Metro Type | Region | Project Grade Level Category |
+| -- | Project Resource Category | Project Subject Category Tree | Project Subject Subcategory Tree | Project Type | School Metro Type | Region | Project Grade Level Category |
+
 |----|----|----|----|----|----|----|----|----|
+
 | Number Of unique values| 17 | 46 | 320 | 3 | 5 | 4 | 4 |
 | Number of unique values in 100 centroids | 9 | 23 | 41 | 3 | 5 | 4 | 4|
 | Number of unique values in 200 centroids | 13 | 25 | 67 | 3 | 5 | 4 | 4|
