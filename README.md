@@ -8,7 +8,7 @@
 ## Data
 
 
-## Clustering Strategies
+## Clustering Strategies - Existing Categories
 ### K-means Clustering
 
 ![](images/average_silhouette_score.png)
@@ -34,15 +34,44 @@ Cost function is defined as the sum distance of all points to their respective c
 | Unique Values | Project Resource Category | Project Subject Category Tree | Project Subject Subcategory Tree | Project Type | School Metro Type | Region | Project Grade Level Category |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Number Of unique values| 17 | 46 | 320 | 3 | 5 | 4 | 4 |
-| Number of unique values in 100 centroids | 9 | 23 | 41 | 3 | 5 | 4 | 4|
-| Number of unique values in 200 centroids | 13 | 25 | 67 | 3 | 5 | 4 | 4|
-| Number of unique values in 200 centroids | 16 | 28 | 82 | 3 | 5 | 4 | 4 |
+| Number of unique values in 100 clusters | 9 | 23 | 41 | 3 | 5 | 4 | 4|
+| Number of unique values in 200 clusters | 13 | 25 | 67 | 3 | 5 | 4 | 4|
+| Number of unique values in 300 clusters | 16 | 28 | 82 | 3 | 5 | 4 | 4 |
 
+
+## Topic Analysis - Project Essays
+### LDA
+
+#### Words to Vectors
+I used SKLearn's CountVectorizer to calculate a term frequency matrix.
+
+| Parameter | Value |
+| --- | --- |
+| max_df (corpus-specific stop words) | .95 |
+| max_features | 10000 |
+| min_df | 1 |
+| stop_words | English |
+
+
+#### Choosing Topics Using Perplexity
+
+LDA Model:
+
+| Parameter | Value |
+| --- | --- |
+| doc_topic_prior (alpha) | None (1 / n_components) |
+| topic_word_prior (Beta) | None (1 / n_components) |
+
+![](images/topic_vs_perplexity_train_only.png)
+Note: this is supposed to decrease as you add more topics – I did some googling and found that there's a [widely discussed](https://stackoverflow.com/questions/45658014/how-to-interpret-sklearn-lda-perplexity-score-why-it-always-increase-as-number) [open bug](https://github.com/scikit-learn/scikit-learn/issues/6777) in the SKLearn implementation of LDA.
+
+In the interest of time, I'll be evaluating number of topics intuitively.  
 
 ## Tools Used
 - Pandas
 - Numpy
 - MatPlotLib
+- SKLearn
 - [KModes](https://pypi.org/project/kmodes/)
 
 ## References
