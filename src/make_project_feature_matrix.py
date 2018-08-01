@@ -4,6 +4,7 @@ import numpy as np
 #input data
 projects = pd.read_csv("Capstone_Data/io/Projects.csv")
 schools = pd.read_csv("Capstone_Data/io/Schools.csv")
+print('data loaded')
 
 #### Get School Information ####
 '''W: West, N: Northeast, M: Midwest, S: South '''
@@ -65,19 +66,21 @@ schools['Region'] = schools['School State'].map(us_states_to_regions)
 metro_type = pd.get_dummies(schools['School Metro Type'])
 region_dummies = pd.get_dummies(schools['Region'])
 schools = pd.concat([schools, metro_type, region_dummies], axis=1)
+print('schools dataframe made')
 
 #merge projects with school information
 projects = pd.merge(projects, schools, on='School ID', how='left')
-
-## Columns to Dates ##
-projects['Project Posted Date'] = pd.to_datetime(projects['Project Posted Date'])
-projects['Project Expiration Date'] = pd.to_datetime(projects['Project Expiration Date'])
+print('projects merged with school information')
 
 ## Remove Rows with null values in these columns:
-projects.dropna(subset = ['Project Title', 'Project Essay', 'Project Short Description', 'Project Need Statement','Project Resource Category' ], inplace=True) #removes a total of 45 rows
+projects.dropna(subset = ['Project Title', 'Project Essay', 'Project Short Description', 'Project Need Statement','Project Resource Category','School Metro Type','Region'], inplace=True) #removes a total of 45 rows
+print('na rows removed')
 
 ## Subset Data
-projects = projects.sample(frac=.01)
+projects = projects.sample(frac=.01, random_state=3)
+
+projects_keep_categories = projects[['Project Title', 'Project Resource Category', 'Project Subject Category Tree', 'Project Subject Subcategory Tree','Project Type', 'School Metro Type','Region', 'Project Grade Level Category']]
+projects_keep_categories.to_csv('projects_with_categorical_data.csv')
 
 ## Columns to Dummies:
 resource_types = pd.get_dummies(projects['Project Resource Category']) #17 columns
@@ -93,8 +96,10 @@ project_dummies = pd.concat([projects, resource_types, subject_category, subject
 project_dummies.drop(['Project Resource Category', 'Project Subject Category Tree', 'Project Subject Subcategory Tree','Project Type', 'Project Current Status', 'Project Fully Funded Date', 'Project Posted Date', 'Teacher Project Posted Sequence', 'Project Essay', 'Project Short Description', 'Project Need Statement', 'Project Grade Level Category', 'School ID', 'School Name', 'School Metro Type', 'School Percentage Free Lunch', 'School State', 'School Zip', 'School City', 'School County', 'School District', 'Region', 'Teacher ID', 'Project Expiration Date' ], axis=1, inplace=True)
 
 #Save Categorical Data to CSV
-project_dummies.to_csv('projects_with_categorical_data.csv')
+project_dummies.to_csv('projects_with_dummy_data.csv')
+print('projects saved to CSV')
 
 #Make corpus
 school_info = projects[['School ID', 'Project Title', 'Project Essay', 'School Metro Type', 'Region']]
 school_info.to_csv('project_essays.csv', index=False)
+print('essays saved to CSV')
