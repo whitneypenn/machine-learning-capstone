@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 #load data
 data = pd.read_csv('projects_with_categorial_data.csv')
-num_clusters = 100
+num_clusters = 300
 
 
 #clean data
@@ -23,15 +23,12 @@ kproto = KModes(n_clusters=num_clusters, init='random', verbose=True)
 # and which ones are numerical
 cluster_obj = kproto.fit(data_to_cluster)
 labels = cluster_obj.labels_
-print(cluster_obj.cluster_centroids_)
+centroids = cluster_obj.cluster_centroids_
 
+centroid_df = pd.DataFrame(centroids, columns=data_to_cluster.columns)
 
-# Print 10 titles in each cluster
-# titles = data['Project Title'].values
-# for i in range(num_clusters):
-#     cluster = np.arange(0, data.shape[0])[labels == i]
-#     sample_titles = cluster
-#     print("cluster {}, {} samples:".format(i, len(cluster)))
-#     cluster_titles = [titles[title] for title in sample_titles]
-#     print(cluster_titles)
-#     print(' ')
+for col in data_to_cluster:
+    print(col)
+    print('centroid', len(centroid_df[col].unique()))
+    print('data', len(data_to_cluster[col].unique()))
+    print('')
