@@ -147,14 +147,14 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 | Care Package for Teens: Second Semester Stock-Up | Rebuilding A Writing Center Destroyed By Hurricane Sandy | Help Fuel My Students' Minds! | Fun Furniture for Fantastic Friends
 
 ## Future Work:
-Other LDA Similarity measurements:
-- Use KS score to find projects with similar document-topic distributions
-Build out the Recommendation Product:
-- Cluster Recommendation:
-  - When a donor is selected, the project that they've donated to is assigned to a cluster, and then three other projects from that cluster are randomly selected and surfaced for that donor. If a donor has donated to more than one project, one of the projects is randomly selected to be the 'seed' project.
-- LDA Recommendation:
+- Other LDA Similarity measurements
+  - Use KS score to find projects with similar document-topic distributions
+Build out the Recommendation Product
+- Cluster Recommendation
+  - When a donor is selected, the project that they've donated to is assigned to a cluster, and then three other projects from that cluster are randomly selected and surfaced for that donor. If a donor has donated to more than one project, one of the projects is randomly selected to be the 'seed' project
+- LDA Recommendation
   - When a donor is selected, the essay of the project that they've donated to is given a document-topic distribution, and then three projects with the closest document-topic distributions are returned.
-- Work with the DonorsChoose.org API for real-time recommendations with your donation history.
+- Work with the DonorsChoose.org API for real-time recommendations with your donation history
 - Work with other recommender architectures
 - Learn how to spell recommender
 
