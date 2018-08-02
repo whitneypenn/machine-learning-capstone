@@ -6,10 +6,10 @@
 Some quick stats about donations, projects, and donors:
 - The average donation is $60.
 - Average Project cost is around $740.
--- The lowest project cost: $35 for seeds for a science project.
--- The highest project cost: $258,000 to fund Olympic Fencing Programs.
--- On average, it takes a project 5 donors to fund fully.
--- 74% of projects are funded fully.
+  - The lowest project cost: $35 for seeds for a science project.
+  - The highest project cost: $258,000 to fund Olympic Fencing Programs.
+  - On average, it takes a project 5 donors to fund fully.
+- 74% of projects are funded fully.
 - 72% of donors make only 1 donation.
 
 ## Project: Build a project recommender to surface projects similar to the projects to which donors have already donated, hopefully to increase the rate of repeat donations.
