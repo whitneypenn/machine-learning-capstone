@@ -4,7 +4,7 @@ from kmodes.kmodes import KModes
 import matplotlib.pyplot as plt
 
 #load data
-data = pd.read_csv('projects_with_categorial_data.csv')
+data = pd.read_csv('data/projects_with_categorial_data.csv')
 num_clusters = 300
 
 

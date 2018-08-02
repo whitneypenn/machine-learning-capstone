@@ -13,7 +13,7 @@ from scipy.spatial import distance
 
 
 #load data
-categorical_data = pd.read_csv('projects_with_dummy_data.csv')
+categorical_data = pd.read_csv('data/projects_with_dummy_data.csv')
 
 #clean data
 categorical_data.drop('Unnamed: 0', axis=1, inplace=True)

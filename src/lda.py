@@ -52,7 +52,7 @@ def test_perplexities(range_to_test, topic_frequency):
     plot_perplexity(range_to_test, perplexities)
 
 def plot_top_words(num_rows, num_cols, top_words_list, image_name=None):
-    fig, axs = plt.subplots(num_rows, num_cols, figsize=(10,3))
+    fig, axs = plt.subplots(num_rows, num_cols, figsize=(10,num_rows*2))
     plt.subplots_adjust(left=.125, bottom=.1, right=.9, top=.9,
                     wspace=.8, hspace=.9)
     plt.suptitle('Distributions Over the Words for Each Topic', fontsize=16)
@@ -71,48 +71,52 @@ def plot_top_words(num_rows, num_cols, top_words_list, image_name=None):
         plt.savefig('images/{}.png'.format(image_name))
     plt.show()
 
-# Read In Essays #
-essays = pd.read_csv('project_essays.csv')
-documents = (essays['Project Title'] + essays['Project Essay']).values
+if __name__=='__main__':
+    essays = pd.read_csv('data/project_essays.csv')
+    documents = (essays['Project Title'] + essays['Project Essay']).values
 
 
-# Set Things #
-my_additional_stop_words = ['school']
-my_stop_words = text.ENGLISH_STOP_WORDS.union(my_additional_stop_words)
+    # Set Things #
+    my_additional_stop_words = ['school']
+    my_stop_words = text.ENGLISH_STOP_WORDS.union(my_additional_stop_words)
 
-count_vectorizer = CountVectorizer(analyzer='word',
-                                    input='content',
-                                    lowercase=True,
-                                    max_df=.9,
-                                    max_features=10000,
-                                    min_df=1,
-                                    ngram_range=(1, 1),
-                                    preprocessor=None,
-                                    stop_words=my_stop_words,
-                                    strip_accents=None,
-                                    token_pattern='(?u)\\b\\w\\w+\\b',
-                                    tokenizer=None,
-                                    vocabulary=None)
+    count_vectorizer = CountVectorizer(analyzer='word',
+                                        input='content',
+                                        lowercase=True,
+                                        max_df=.9,
+                                        max_features=10000,
+                                        min_df=1,
+                                        ngram_range=(1, 1),
+                                        preprocessor=None,
+                                        stop_words=my_stop_words,
+                                        strip_accents=None,
+                                        token_pattern='(?u)\\b\\w\\w+\\b',
+                                        tokenizer=None,
+                                        vocabulary=None)
 
-tf = count_vectorizer.fit_transform(documents)
+    tf = count_vectorizer.fit_transform(documents)
 
-#Uncomment these lines to test your range of topics
-# topic_count = [3]
-#test_perplexities(topic_count, tf)
+    #Uncomment these lines to test your range of topics
+    # topic_count = [3]
+    #test_perplexities(topic_count, tf)
 
-n_top_words = 5
-n_components = 5
+    n_top_words = 5
+    ## if you want the plotting to be nice, make this a multiple of 5
+    n_components = 15
 
-# Create an LDA model with a useful number of topics:
-lda = LatentDirichletAllocation(n_components=n_components, max_iter=5,
-                                learning_method='online',
-                                learning_offset=50.,
-                                random_state=0)
+    # Create an LDA model with a useful number of topics:
+    lda = LatentDirichletAllocation(n_components=n_components, max_iter=5,
+                                    learning_method='online',
+                                    learning_offset=50.,
+                                    random_state=0)
 
-lda.fit_transform(tf)
+    doc_topic_dist = lda.fit_transform(tf)
 
-# Inspect Results #
+    # Inspect Results #
 
-tf_feature_names = count_vectorizer.get_feature_names()
-top_words = get_top_words(lda, tf_feature_names, n_top_words)
-plot_top_words(1, 5, top_words)
+    tf_feature_names = count_vectorizer.get_feature_names()
+    top_words = get_top_words(lda, tf_feature_names, n_top_words)
+    plot_top_words(n_components//5, 5, top_words)
+
+
+# LDA Recommender
