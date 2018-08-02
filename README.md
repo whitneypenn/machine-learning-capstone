@@ -8,7 +8,7 @@
 ## Data
 
 
-## Clustering Strategies - Existing Categories
+## Recommend Based on Clusters of Existing Categories
 ### K-means Clustering
 
 ![](images/average_silhouette_score.png)
@@ -39,33 +39,68 @@ Cost function is defined as the sum distance of all points to their respective c
 | Number of unique values in 300 clusters | 16 | 28 | 82 | 3 | 5 | 4 | 4 |
 
 
-## Topic Analysis - Project Essays
-### LDA
+## Recommend Based on Document Topic Distributions Using LDA
 
-#### Words to Vectors
+
+### Words to Vectors
 I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 
 | Parameter | Value |
 | --- | --- |
-| max_df (corpus-specific stop words) | .95 |
-| max_features | 10000 |
-| min_df | 1 |
-| stop_words | English |
+| ``max_df`` (corpus-specific stop words) | .9 |
+| ``stop_words`` | 'english' + 'school' |
+| ``max_features`` | 10000 |
+| ``min_df`` | 1 |
+| ``n_gram_range`` | (1, 1) |
 
-
-#### Choosing Topics Using Perplexity
-
-LDA Model:
+### Hyperparameters
 
 | Parameter | Value |
 | --- | --- |
-| doc_topic_prior (alpha) | None (1 / n_components) |
-| topic_word_prior (Beta) | None (1 / n_components) |
+| ``doc_topic_prior`` (alpha) | None (1 / n_components) |
+| ``topic_word_prior`` (Beta) | None (1 / n_components) |
+| ``learning_method`` | 'online' |
+| ``learning_decay`` | .7 |
+| ``learning_offset`` | 50. |
 
-![](images/topic_vs_perplexity_train_only.png)
-Note: this is supposed to decrease as you add more topics – I did some googling and found that there's a [widely discussed](https://stackoverflow.com/questions/45658014/how-to-interpret-sklearn-lda-perplexity-score-why-it-always-increase-as-number) [open bug](https://github.com/scikit-learn/scikit-learn/issues/6777) in the SKLearn implementation of LDA.
+* The ``doc_topic_prior`` and ``topic_word_prior``
+* Online variational Bayes method. In each EM update, use mini-batch of training data to update the ``components_`` variable incrementally. Learning rate is controlled by ``learning_decay`` and the ``learning_offset`` parameters.
 
-In the interest of time, I'll be evaluating number of topics intuitively.  
+### Choosing Topics
+#### 5 Topics
+![](images/5_topic_lda.png)
+
+#### 10 Topics
+![](images/10_topic_lda.png)
+
+#### 15 Topics
+![](images/15_topic_lda.png)
+
+#### 20 Topics
+![](images/20_topic_lda.png)
+
+#### Analysis
+15 topics looks like the way to go - Each of the topics is specific and distinct. Here's what I named the topics.
+
+| Topic Interpretation | Words |
+| --- | --- |
+| Art  | art, create, arts, creative, projects |
+| Classroom Necessities | learning, classroom, learn, help, use |
+| Books | reading, books, read, book, love |
+| Student Basic Needs | supplies, need, materials, help, paper |
+| Classroom Furniture | classroom, seating, learning, sit, chairs |
+| Hands-on Science | science, world, hands, life, experience |
+| Extracurricular Activities | friday, cheer, devote, flashlights, flashlight |
+| Refugee Resources or International Projects | American, African, Hispanic, software, war |
+| 9 | battle, Haiti, enticing, mouthpieces, ereaders |  
+| Teacher Training | academy, training, conference, seat, sacks |
+| Gardening and Food | food, healthy, play, garden, life |
+| Technology Supplies | technology, math, use, ipad, ipads |
+| STEM Labs | stem, problem, create, engineering, build |
+| Music | music, instruments, play, band, program |
+| Sports Equipment | team, equipment, sports, game, club |
+
+
 
 ## Tools Used
 - Pandas
