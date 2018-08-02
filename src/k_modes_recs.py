@@ -4,16 +4,23 @@ from kmodes.kmodes import KModes
 import matplotlib.pyplot as plt
 
 #load data
-data = pd.read_csv('data/projects_with_categorial_data.csv')
-num_clusters = 300
+data = pd.read_csv('data/categorical_data.csv')
+test_data = pd.read_csv('data/test_categorical_data.csv')
+num_clusters = 100
 
 
 #clean data
 data.drop('Unnamed: 0', axis=1, inplace=True)
 data.dropna(inplace=True)
+#clean test_data
+test_data.drop('Unnamed: 0', axis=1, inplace=True)
+test_data.dropna(inplace=True)
 print('Data loaded. Working with {} samples.'.format(data.shape[0]))
 
 data_to_cluster = data[['Project Resource Category',
+       'Project Subject Category Tree', 'Project Subject Subcategory Tree',
+       'Project Type', 'School Metro Type', 'Region', 'Project Grade Level Category']]
+test_data_for_clustering = test_data[['Project Resource Category',
        'Project Subject Category Tree', 'Project Subject Subcategory Tree',
        'Project Type', 'School Metro Type', 'Region', 'Project Grade Level Category']]
 
@@ -25,10 +32,21 @@ cluster_obj = kproto.fit(data_to_cluster)
 labels = cluster_obj.labels_
 centroids = cluster_obj.cluster_centroids_
 
-centroid_df = pd.DataFrame(centroids, columns=data_to_cluster.columns)
+#randomly sample from the test projects
+for i in range(5):
+    sample = test_data_for_clustering.sample()
+    sample_title = test_data.iloc[sample.index.values]['Project Title'].values[0]
 
-for col in data_to_cluster:
-    print(col)
-    print('centroid', len(centroid_df[col].unique()))
-    print('data', len(data_to_cluster[col].unique()))
-    print('')
+    #get a cluster prediction
+    pred = cluster_obj.predict(sample)
+
+    #find the projects with that label, select three of them:
+    rec_idx = data_to_cluster[labels == pred].sample(3)
+    rec_titles = data.iloc[rec_idx.index.values]['Project Title'].values
+
+    print('Project {}'.format(i+1))
+    print('Seed Project Title: ', sample_title)
+    print("Recommendations: ")
+    for rec in rec_titles:
+        print('   ', rec)
+    print(' ')
