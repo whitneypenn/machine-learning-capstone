@@ -73,10 +73,7 @@ The cost function is defined as the sum distance of all points to their respecti
 | No More Criss Cross Applesauce | 1st Graders Move and Groove With Technology! | Happy Stream, Happy Team! | Chromebooks For Kids
 |  Super Supplies! | Writing Wizards | Colors, Colors Everywhere... Create A Picture If You Dare | Building Creative Solutions With Osmos
 
-
-
 ## Part 2: Recommend Based on Document Topic Distributions Using LDA
-
 
 ### Words to Vectors
 I used SKLearn's CountVectorizer to calculate a term frequency matrix.
@@ -99,7 +96,6 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 | ``learning_decay`` | .7 |
 | ``learning_offset`` | 50. |
 
-* The ``doc_topic_prior`` and ``topic_word_prior``
 * Online variational Bayes method. In each EM update, use mini-batch of training data to update the ``components_`` variable incrementally. Learning rate is controlled by ``learning_decay`` and the ``learning_offset`` parameters.
 
 ### Choosing Topics
@@ -136,12 +132,28 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 | Music | music, instruments, play, band, program |
 | Sports Equipment | team, equipment, sports, game, club |
 
-## Future Work:
-Cluster Recommendation Architecture:
-- When a donor is selected, the project that they've donated to is assigned to a cluster, and then three other projects from that cluster are randomly selected and surfaced for that donor. If a donor has donated to more than one project, one of the projects is randomly selected to be the 'seed' project.
+#### Recommendations - Cosine Similarity
+| Seed Project Title | Recommendation 1 | Recommendation 2 | Recommendation 3 |
+| --- | --- | --- | --- |
+| Shhhh...Listen: We Need Technology! | One, Two, Threes and ABCs | Chromebooks- Family Style! | Technology in the Classroom
+| Flipped Classroom | Preschool Special Education, Communication and Learning Materials | Super Supplemental Materials | Big Hands, Little Minds|
+| Scarves and Discs for Fourth Grade Jugglers| Headphone Help | A Special Storytime Rug | Empower Pre-K Students to Learn Through Music |
+| Assistive Technology for Students | Masterful Students Mastering Mathematics | Math In Hard Copy | Help Me Learn |
+| Technology for Artists | Technology Accessories | Reaching All Students Via Flipping The Class | Help Us Share and Show Off! |
+| Care Package for Teens: Second Semester Stock-Up | Rebuilding A Writing Center Destroyed By Hurricane Sandy | Help Fuel My Students' Minds! | Fun Furniture for Fantastic Friends
 
-LDA Recommendation Architecture:
-- When a donor is selected, the essay of the project that they've donated to is given a document-topic distribution, and then three projects with the closest document-topic distributions are returned.
+## Future Work:
+Other LDA Similarity measurements:
+- Use KS score to find projects with similar document-topic distributions
+Build out the Recommendation Product:
+- Cluster Recommendation:
+  - When a donor is selected, the project that they've donated to is assigned to a cluster, and then three other projects from that cluster are randomly selected and surfaced for that donor. If a donor has donated to more than one project, one of the projects is randomly selected to be the 'seed' project.
+- LDA Recommendation:
+  - When a donor is selected, the essay of the project that they've donated to is given a document-topic distribution, and then three projects with the closest document-topic distributions are returned.
+- Work with the DonorsChoose.org API for real-time recommendations with your donation history.
+- Work with other recommender architectures
+- Learn how to spell recommender
+
 
 ## Tools Used
 - Pandas
@@ -151,3 +163,4 @@ LDA Recommendation Architecture:
 - [KModes](https://pypi.org/project/kmodes/)
 
 ## References
+- [Clustering Categorical Data with k-Modes, Joshua Zhexue Huang](http://www.irma-international.org/viewtitle/10828/)
