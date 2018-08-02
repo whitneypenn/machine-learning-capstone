@@ -12,7 +12,7 @@ Some quick stats about donations, projects, and donors:
 - 74% of projects are funded fully.
 - 72% of donors make only 1 donation.
 
-## Project: Build a project recommender to surface projects similar to the projects to which donors have already donated, hopefully to increase the rate of repeat donations.
+## Project: Build a recommender that will surface similar projects to the ones that DonorosChoose.org donors have already donated to.
 
 ## Data
 Sourced from Kaggle ([competition here](https://www.kaggle.com/c/donorschoose-application-screening)). Since the competition was over, I did my own thing with the data you get if you click the "download all" link.
@@ -23,8 +23,8 @@ In addition to project information, each school had some interesting features, w
 
 I ended up with two different Feature Matricies for my two different analysis strategies. For clustering, I worked with the categorical data already aggregated by DonorsChoose. Here are those features and some examples of their unique values:
 
-| 'Project Title | Project Resource Category (17) | Project Subject Category Tree (46) |Project Subject Subcategory Tree (320) | Project Type (3) |School Metro Type (5) | Region (4) | Project Grade Level Category (4) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | -- |
+| 'Project Title | Project Resource Category (17) | Project Subject Category Tree (46) | Project Subject Subcategory Tree (320) | Project Type (3) | School Metro Type (5) | Region (4) | Project Grade Level Category (4) |
+| --- | --- | --- | --- | --- | --- | --- | --- | 
 |n/a | Supplies, Books, Lab Equipment, Food, Clothing & Hygiene | Math & Science Health & Sports, Special Needs Literacy & Language | History & Geography, Other, Health & Wellness, Performing Arts, Character Education, Economics,  Civics & Government, College & Career Prep Environmental Science, Nutrition Education | Teacher-Led, Professional Development, Student-Led |Suburban, Rural, Urban, Unknown, Town | South, Midwest, West, Northeast| Suburban, Rural, Urban, Unknown, Town |  
 
 For topic analysis, I used the Title of the Project concatenated with a full project essay. Here's a part of a project essay:
