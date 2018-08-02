@@ -30,9 +30,13 @@ I ended up with two different Feature Matricies for my two different analysis st
 For topic analysis, I used the Title of the Project concatenated with a full project essay. Here's part of a project essay:
 
 ```Our students need more time to play, construct, and learn.
-We are requesting funding to purchase STEM related games and activities, including Robot Turtles Game, Camelot Jr. Game, Dominoes, LEGO Chain Reactions Kit, Mental Blox Critical Thinking Game, Q-Ba-Maze Game, Gravity Maze, and much more.
-We will put out 4-5 different STEM activities each week.  Each week, students will be assigned a different station, this will allow students to explore all the different games and activities. [...]
-Our students will greatly benefit from this project because  these STEM games/activities will help enrich our classroom and help my students develop their STEM skills. These materials will help foster a collaborative classroom environment. [...]
+We are requesting funding to purchase STEM related games and activities, including Robot Turtles Game,
+Camelot Jr. Game, Dominoes, LEGO Chain Reactions Kit, Mental Blox Critical Thinking Game, Q-Ba-Maze Game,
+Gravity Maze, and much more.We will put out 4-5 different STEM activities each week.  Each week,
+students will be assigned a different station, this will allow students to explore all the different
+games and activities. [...] Our students will greatly benefit from this project because  these STEM
+games/activities will help enrich our classroom and help my students develop their STEM skills. These
+materials will help foster a collaborative classroom environment. [...]
 ```
 
 
