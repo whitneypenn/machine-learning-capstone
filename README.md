@@ -24,10 +24,10 @@ In addition to project information, each school had some interesting features, w
 I ended up with two different Feature Matricies for my two different analysis strategies. For clustering, I worked with the categorical data already aggregated by DonorsChoose. Here are those features and some examples of their unique values:
 
 | 'Project Title | Project Resource Category (17) | Project Subject Category Tree (46) | Project Subject Subcategory Tree (320) | Project Type (3) | School Metro Type (5) | Region (4) | Project Grade Level Category (4) |
-| --- | --- | --- | --- | --- | --- | --- | --- | 
+| --- | --- | --- | --- | --- | --- | --- | --- |
 |n/a | Supplies, Books, Lab Equipment, Food, Clothing & Hygiene | Math & Science Health & Sports, Special Needs Literacy & Language | History & Geography, Other, Health & Wellness, Performing Arts, Character Education, Economics,  Civics & Government, College & Career Prep Environmental Science, Nutrition Education | Teacher-Led, Professional Development, Student-Led |Suburban, Rural, Urban, Unknown, Town | South, Midwest, West, Northeast| Suburban, Rural, Urban, Unknown, Town |  
 
-For topic analysis, I used the Title of the Project concatenated with a full project essay. Here's a part of a project essay:
+For topic analysis, I used the Title of the Project concatenated with a full project essay. Here's part of a project essay:
 
 ```Our students need more time to play, construct, and learn.
 We are requesting funding to purchase STEM related games and activities, including Robot Turtles Game, Camelot Jr. Game, Dominoes, LEGO Chain Reactions Kit, Mental Blox Critical Thinking Game, Q-Ba-Maze Game, Gravity Maze, and much more.
@@ -36,7 +36,7 @@ Our students will greatly benefit from this project because  these STEM games/ac
 ```
 
 
-## Recommend Based on Clusters of Existing Categories
+## Part 1: Recommend Based on Clusters of Existing Categories
 ### K-means Clustering
 
 ![](images/average_silhouette_score.png)
@@ -56,15 +56,14 @@ k_modes(categorical_data):
     #re-assign each data point to minimize dissimilarity between the data point and the centroids
 ```
 
-Dissimilarity is calculated between each data point and the centroid. A value of one is given to features that are categorial mis-matches, and a value of 0 is given to the features that match. The dissimilarity is a summation of those values, so the larger
+Dissimilarity is calculated between each data point and the centroid. A value of 1 is given to features that are categorial mis-matches, and a value of 0 is given to the features that match. The dissimilarity is a summation of those values, so the larger
 the number of mismatches of categorical values between the data point and the centroid is, the more dissimilar the two objects. [More Information Here.](http://www.irma-international.org/viewtitle/10828/)
 
 The cost function is defined as the sum distance of all points to their respective cluster centroids, so it's the total dissimilarity of all the points to their respective cluster centroids. Much like with SSE and k-means clustering, you're looking for an inflection point.
+
 ![](images/cost_with_k_modes_using_right_data_random_init.png)
 
-#### Recommendations Methodology:
-A new project is assigned a cluster, then three other projects from that cluster are returned.
-
+#### Recommendations Using 100 Clusters:
 | Seed Project Title | Recommendation 1 | Recommendation 2 | Recommendation 3 |
 | --- | --- | --- | --- |
 | Civics + Economics = Fun Learning!| Boomwhacking Our Way To Understanding Sound Waves | Dress to Impress! | Give Us a Boost and Recharge Our Learning |
@@ -76,7 +75,7 @@ A new project is assigned a cluster, then three other projects from that cluster
 
 
 
-## Recommend Based on Document Topic Distributions Using LDA
+## Part 2: Recommend Based on Document Topic Distributions Using LDA
 
 
 ### Words to Vectors
