@@ -5,6 +5,7 @@ from sklearn.decomposition import LatentDirichletAllocation, NMF
 from sklearn.model_selection import cross_validate
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction import text
+from nltk.stem.snowball import SnowballStemmer
 
 def get_top_words(model, feature_names, n_top_words):
     topic_word_probs = []
@@ -74,7 +75,7 @@ def plot_top_words(num_rows, num_cols, top_words_list, image_name=None):
 if __name__=='__main__':
     essays = pd.read_csv('data/project_essays.csv')
     documents = (essays['Project Title'] + essays['Project Essay']).values
-
+    print('docs loaded')
 
     # Set Things #
     my_additional_stop_words = ['school']
@@ -95,7 +96,7 @@ if __name__=='__main__':
                                         vocabulary=None)
 
     tf = count_vectorizer.fit_transform(documents)
-
+    print('done fitting count vectorizer')
     #Uncomment these lines to test your range of topics
     # topic_count = [3]
     #test_perplexities(topic_count, tf)
@@ -109,14 +110,25 @@ if __name__=='__main__':
                                     learning_method='online',
                                     learning_offset=50.,
                                     random_state=0)
-
+    print('fitting LDA')
     doc_topic_dist = lda.fit_transform(tf)
-
     # Inspect Results #
 
     tf_feature_names = count_vectorizer.get_feature_names()
     top_words = get_top_words(lda, tf_feature_names, n_top_words)
-    plot_top_words(n_components//5, 5, top_words)
+    #plot_top_words(n_components//5, 5, top_words)
 
 
-# LDA Recommender
+# Make LDA Reccomendations Based on Cosine Similarity of Topic Distributions
+    # build cosine sim matrix
+    cos_sim_matrix = cosine_similarity(doc_topic_dist)
+
+    for i in range(6):
+        random_essay_index = essays.sample().index[0]
+
+        closest_topics = cos_sim_matrix[random_essay_index].argsort()[-4:]
+
+        print('Seed Project:', essays.iloc[random_essay_index]['Project Title'])
+        print('Recs:')
+        for i in closest_topics[:3]:
+            print('  ', essays.iloc[i]["Project Title"])
