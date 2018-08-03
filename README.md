@@ -90,7 +90,7 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 | ``min_df`` | 1 |
 | ``n_gram_range`` | (1, 1) |
 
-### Hyperparameters
+### LDA Hyperparameters
 
 | Parameter | Value |
 | --- | --- |
@@ -100,9 +100,7 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 | ``learning_decay`` | .7 |
 | ``learning_offset`` | 50. |
 
-* Online variational Bayes method. In each EM update, use mini-batch of training data to update the ``components_`` variable incrementally. Learning rate is controlled by ``learning_decay`` and the ``learning_offset`` parameters.
-
-### Choosing Topics
+### Choosing Number of Topics
 #### 5 Topics
 ![](images/5_topic_lda.png)
 
@@ -116,7 +114,7 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 ![](images/20_topic_lda.png)
 
 #### Analysis
-15 topics looks like the way to go - Each of the topics is specific and distinct. Here's what I named the topics.
+15 topics looks like the way to go, each of the topics is specific and distinct from each other.
 
 | Topic Interpretation | Words |
 | --- | --- |
@@ -136,7 +134,7 @@ I used SKLearn's CountVectorizer to calculate a term frequency matrix.
 | Music | music, instruments, play, band, program |
 | Sports Equipment | team, equipment, sports, game, club |
 
-#### Recommendations - Cosine Similarity
+#### Recommendations - Cosine Similarity between document-topic distributions vectors
 | Seed Project Title | Recommendation 1 | Recommendation 2 | Recommendation 3 |
 | --- | --- | --- | --- |
 | Shhhh...Listen: We Need Technology! | One, Two, Threes and ABCs | Chromebooks- Family Style! | Technology in the Classroom
