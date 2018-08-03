@@ -12,7 +12,7 @@ Some quick stats about donations, projects, and donors:
 - 74% of projects are funded fully.
 - 72% of donors make only 1 donation.
 
-## Project: Build a recommender that will surface similar projects to the ones that DonorosChoose.org donors have already donated to.
+## Project: Select the best method to recommend DonorsChoose.org projects based on a user's donation history.
 
 ## Data
 Sourced from Kaggle ([competition here](https://www.kaggle.com/c/donorschoose-application-screening)). Since the competition was over, I did my own thing with the data you get if you click the "download all" link.
